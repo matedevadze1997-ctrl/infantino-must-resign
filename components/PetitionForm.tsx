@@ -39,7 +39,7 @@ export default function PetitionForm() {
         "Your name has been added. Thank you for standing up for accountability."
       );
 
-      ();
+      formElement.reset();
     } catch (error) {
       setStatus("error");
       setMessage(
