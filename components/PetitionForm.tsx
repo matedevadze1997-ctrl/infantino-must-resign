@@ -10,10 +10,13 @@ export default function PetitionForm() {
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    const formElement = event.currentTarget;
+
     setStatus("submitting");
     setMessage("");
 
-    const form = new FormData(event.currentTarget);
+    const form = new FormData(formElement);
     const payload = Object.fromEntries(form.entries());
 
     try {
@@ -22,18 +25,26 @@ export default function PetitionForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Your signature could not be submitted.");
+        throw new Error(
+          data.error || "Your signature could not be submitted."
+        );
       }
 
       setStatus("success");
-      setMessage("Your name has been added. Thank you for standing up for accountability.");
-      event.currentTarget.reset();
+      setMessage(
+        "Your name has been added. Thank you for standing up for accountability."
+      );
+
+      ();
     } catch (error) {
       setStatus("error");
-      setMessage(error instanceof Error ? error.message : "Something went wrong.");
+      setMessage(
+        error instanceof Error ? error.message : "Something went wrong."
+      );
     }
   }
 
@@ -42,22 +53,47 @@ export default function PetitionForm() {
       <div className="twoCol">
         <label>
           First name
-          <input name="firstName" required minLength={2} maxLength={60} autoComplete="given-name" />
+          <input
+            name="firstName"
+            required
+            minLength={2}
+            maxLength={60}
+            autoComplete="given-name"
+          />
         </label>
+
         <label>
           Last name
-          <input name="lastName" required minLength={2} maxLength={60} autoComplete="family-name" />
+          <input
+            name="lastName"
+            required
+            minLength={2}
+            maxLength={60}
+            autoComplete="family-name"
+          />
         </label>
       </div>
 
       <label>
         Email address <small>Never displayed publicly</small>
-        <input name="email" type="email" required maxLength={254} autoComplete="email" />
+        <input
+          name="email"
+          type="email"
+          required
+          maxLength={254}
+          autoComplete="email"
+        />
       </label>
 
       <label>
         Country
-        <input name="country" required minLength={2} maxLength={80} autoComplete="country-name" />
+        <input
+          name="country"
+          required
+          minLength={2}
+          maxLength={80}
+          autoComplete="country-name"
+        />
       </label>
 
       <label>
@@ -69,16 +105,25 @@ export default function PetitionForm() {
         <input name="consent" type="checkbox" value="true" required />
         <span>
           I confirm that I am signing voluntarily and accept the{" "}
-          <a href="/privacy" target="_blank">Privacy Policy</a>.
+          <a href="/privacy" target="_blank" rel="noreferrer">
+            Privacy Policy
+          </a>
+          .
         </span>
       </label>
 
-      <button className="formButton" type="submit" disabled={status === "submitting"}>
+      <button
+        className="formButton"
+        type="submit"
+        disabled={status === "submitting"}
+      >
         {status === "submitting" ? "Submitting…" : "Add my name"}
       </button>
 
       {message && (
-        <p className={`formMessage ${status}`} role="status">{message}</p>
+        <p className={`formMessage ${status}`} role="status">
+          {message}
+        </p>
       )}
     </form>
   );
