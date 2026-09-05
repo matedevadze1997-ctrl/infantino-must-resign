@@ -137,9 +137,7 @@ export default function Home() {
         </div>
         <div>
           <p>
-            Contributions will help cover the domain, hosting, security,
-            maintenance and responsible promotion. A payment option will be
-            added after the petition infrastructure is fully tested.
+            Contributions help cover the domain, hosting, security, maintenance and responsible promotion of this independent campaign. Support is completely optional.
           </p>
           <a
   className="outlineButton"
