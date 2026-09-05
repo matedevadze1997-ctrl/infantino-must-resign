@@ -141,8 +141,14 @@ export default function Home() {
             maintenance and responsible promotion. A payment option will be
             added after the petition infrastructure is fully tested.
           </p>
-          <button className="outlineButton" disabled>Support coming soon</button>
-        </div>
+          <but<a
+  className="outlineButton"
+  href="https://buy.stripe.com/3cI7sD5ikfYm18scPJdwc00"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Support the campaign
+</a>
       </section>
 
       <footer>
