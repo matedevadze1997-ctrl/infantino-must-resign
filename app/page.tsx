@@ -141,7 +141,7 @@ export default function Home() {
             maintenance and responsible promotion. A payment option will be
             added after the petition infrastructure is fully tested.
           </p>
-          <but<a
+          <a
   className="outlineButton"
   href="https://buy.stripe.com/3cI7sD5ikfYm18scPJdwc00"
   target="_blank"
