@@ -149,8 +149,8 @@ export default function Home() {
 >
   Support the campaign
 </a>
+      </div>
       </section>
-
       <footer>
         <a className="brand footerBrand" href="#top">IMR<span>.</span></a>
         <p>
