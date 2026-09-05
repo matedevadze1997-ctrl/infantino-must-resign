@@ -1,23 +1,25 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 export default function PetitionForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const formElement = event.currentTarget;
-
-    setStatus("submitting");
-    setMessage("");
+    const formElement = formRef.current;
+    if (!formElement) return;
 
     const form = new FormData(formElement);
     const payload = Object.fromEntries(form.entries());
+
+    setStatus("submitting");
+    setMessage("");
 
     try {
       const response = await fetch("/api/signatures", {
@@ -39,7 +41,7 @@ export default function PetitionForm() {
         "Your name has been added. Thank you for standing up for accountability."
       );
 
-      formElement.reset();
+      formRef.current?.reset();
     } catch (error) {
       setStatus("error");
       setMessage(
@@ -49,7 +51,7 @@ export default function PetitionForm() {
   }
 
   return (
-    <form className="petitionForm" onSubmit={submit}>
+    <form className="petitionForm" ref={formRef} onSubmit={submit}>
       <div className="twoCol">
         <label>
           First name
